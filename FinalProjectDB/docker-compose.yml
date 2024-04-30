@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    container_name: team5-mysql
+    env_file: 
+      - .env
+    environment: 
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "8010:3306"
+    volumes:
+      - "Team5Data:/var/lib/mysql"
+
+volumes:
+  Team5Data :
+    name: team5DataVolume
