@@ -1,21 +1,25 @@
 version: '3.9'
 services:
   db:
-    image: mysql:8.2.0
+    image: mysql:latest
     restart: always
-    container_name: team5mysql
+    container_name: team5
     env_file: 
       - .env
     environment: 
+      # MYSQL_ROOT_USER: eric
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_HOST: '%'
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
     ports:
       - "${MYSQL_PORT}:3306"
     volumes:
-      - Team5Data:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      # - Team5Data:/var/lib/mysql
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data:/var/lib/mysql
 
-volumes:
-  Team5Data :
+# volumes:
+  # Team5Data :
